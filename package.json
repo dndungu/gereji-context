@@ -1,0 +1,27 @@
+{
+  "name": "gereji-context",
+  "version": "0.0.1",
+  "description": "Browser and server cookies helper.",
+  "main": "context.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dnjuguna/gereji-context.git"
+  },
+  "keywords": [
+    "http",
+    "https",
+    "request",
+    "response",
+    "streaming",
+    "logging"
+  ],
+  "author": "David Njuguna <dnjuguna@gmail.com> (https://github.com/dnjuguna)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dnjuguna/gereji-context/issues"
+  },
+  "homepage": "https://github.com/dnjuguna/gereji-context"
+}
