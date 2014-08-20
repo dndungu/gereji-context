@@ -14,12 +14,12 @@ module.exports = function(){
 				store: {buffer : {}}
 			};
 			this.set("settings", settings);
-			var cookies = new (require('gereji-cookies.js'));
+			var cookies = new (require('gereji-cookies'));
 			this.set("cookies", cookies);
-			var broker = new (require('gereji-broker.js'));
+			var broker = new (require('gereji-broker'));
 			broker.set("context", context);
-			this.set("user", (new (require('gereji-user.js'))));
-			var encryption = new (require('gereji-encryption.js'));
+			this.set("user", (new (require('gereji-user'))));
+			var encryption = new (require('gereji-encryption'));
 			encryption.init(context);
 			this.set("encryption", encryption);
 			this.set("storage", storage);
