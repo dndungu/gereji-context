@@ -23,7 +23,7 @@
 		"gereji-cookies" : ">= 0.0.2",
 		"gereji-encryption" : ">= 0.0.2",
 		"gereji-storage" : ">= 0.0.2",
-		"gereji-translator" : ">= 0.0.2",
+		"gereji-translator" : ">= 0.0.2"
 	},
 	"author": "David Njuguna <dnjuguna@gmail.com> (https://github.com/dnjuguna)",
 	"license": "MIT",
