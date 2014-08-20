@@ -7,7 +7,7 @@ module.exports = function(){
 	var self = {};
 
 	return {
-		init: function(){
+		init: function(settings){
 			self = {
 				statusCode: 200,
 				headers: {},
