@@ -22,7 +22,6 @@ module.exports = function(){
 			var encryption = new (require('gereji-encryption'));
 			encryption.init(this);
 			this.set("encryption", encryption);
-			this.set("storage", storage);
 			this.set("broker", broker);
 			return this;
 		},
