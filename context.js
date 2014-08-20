@@ -17,7 +17,6 @@ module.exports = function(){
 			var cookies = new (require('gereji-cookies'));
 			this.set("cookies", cookies);
 			var broker = new (require('gereji-broker'));
-			broker.set("context", context);
 			this.set("user", (new (require('gereji-user'))));
 			var encryption = new (require('gereji-encryption'));
 			encryption.init(context);
