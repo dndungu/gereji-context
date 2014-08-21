@@ -7,15 +7,6 @@ module.exports = function(){
 	return {
 		init: function(settings){
 			self.store = {};
-			this.set("settings", settings);
-			this.set("cookies", (new (require('gereji-cookies'))));
-			var broker = new (require('gereji-broker'));
-			broker.set("context", this);
-			this.set("broker", broker);
-			this.set("user", (new (require('gereji-user'))));
-			var encryption = new (require('gereji-encryption'));
-			encryption.init(this.get("settings").key);
-			this.set("encryption", encryption);
 			return this;
 		},
 		set : function(name, value) {
