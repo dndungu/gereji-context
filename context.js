@@ -1,28 +1,21 @@
 "use strict";
-
 var fs = require('fs');
-
 module.exports = function(){
 
 	var self = {};
 
 	return {
 		init: function(settings){
-			self = {
-				statusCode: 200,
-				headers: {},
-				store: {buffer : {}}
-			};
+			self.store = {};
 			this.set("settings", settings);
-			var cookies = new (require('gereji-cookies'));
-			this.set("cookies", cookies);
+			this.set("cookies", (new (require('gereji-cookies'))));
 			var broker = new (require('gereji-broker'));
 			broker.set("context", this);
+			this.set("broker", broker);
 			this.set("user", (new (require('gereji-user'))));
 			var encryption = new (require('gereji-encryption'));
-			encryption.init(this);
+			encryption.init(this.get("settings").key);
 			this.set("encryption", encryption);
-			this.set("broker", broker);
 			return this;
 		},
 		set : function(name, value) {
@@ -39,26 +32,27 @@ module.exports = function(){
 			return self.statusCode;
 		},
 		header: function(){
-			var key = arguments[0] ? arguments[0].toLowerCase() : arguments[0];
+			var key = arguments[0].toLowerCase();
 			var value = arguments[1];
 			if(value)
 				self.headers[key] = value;
-			if(key && !value)
+			else
 				return self.headers[key];
 			return this;
 		},
 		headers: function(){
 			return self.headers;
 		},
-		buffer: function(){
-			if(!arguments[0])
-				return self.store.buffer;
-			var app = arguments[0].app.app;
-			var handler = arguments[0].app.handler;
-			self.store.buffer = self.store.buffer ? self.store.buffer : {};
-			self.store.buffer[app] = self.store.buffer[app] ? self.store.buffer[app] : {};
-			self.store.buffer[app][handler] = self.store.buffer[app][handler] ? self.store.buffer[app][handler] : [];
-			self.store.buffer[app][handler].push(arguments[0].content);
+		publish: function(error, data){
+			if(error)
+				data.data = error;
+			this.get("gereji-publisher").push(data.app, data.handler, data.data);
+			this.set("queue", (this.get("queue") - 1));
+            if(this.get("route").sync)
+                if(this.get("queue") > 0)
+                    return this;
+            var publisher = this.get("publisher");
+            publisher.write(this);
 			return this;
 		},
 		log: function(severity, message){
@@ -68,9 +62,7 @@ module.exports = function(){
 			if(severity > self.store.settings.debug.level)
 				return;
 			var line = (new Date()) + ' (' + severity + ') : [' + uri + '] ' + ' {' + method + '} ' + (JSON.stringify(message));
-			fs.appendFile(logfile, line, function(){
-				console.log(line);
-			});
+			fs.appendFile(logfile, line, function(){});
 			return this;
 		},
 		require: function(){
