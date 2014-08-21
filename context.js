@@ -52,7 +52,7 @@ module.exports = function(){
 			var method = self.store.method;
 			if(severity > self.store.settings.debug.level)
 				return;
-			var line = (new Date()) + ' (' + severity + ') : [' + uri + '] ' + ' {' + method + '} ' + (JSON.stringify(message));
+			var line = (new Date()) + ' (' + severity + ') : [' + uri + '] ' + ' {' + method + '} ' + (JSON.stringify(message)) + '\n';
 			fs.appendFile(logfile, line, function(){});
 			return this;
 		},
