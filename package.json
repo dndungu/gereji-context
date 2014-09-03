@@ -1,6 +1,6 @@
 {
 	"name": "gereji-context",
-		"version": "0.1.3",
+		"version": "0.1.4",
 		"description": "A client and server side cookies helper for the gereji web application framework.",
 		"main": "context.js",
 		"scripts": {
